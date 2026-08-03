@@ -11,7 +11,7 @@ checkStringLength('проверяемая строка', 10);
 // Палиндромы
 
 function isPalindrome(string) {
- 
+
   const normalizedString = string.replaceAll(' ', '').toLowerCase();
 
   let reversedString = '';
