@@ -4,11 +4,11 @@ function checkStringLength(string, maxLength) {
   return string.length <= maxLength;
 }
 
-console.log(checkStringLength('проверяемая строка', 20));
-console.log(checkStringLength('проверяемая строка', 18));
-console.log(checkStringLength('проверяемая строка', 10));
+checkStringLength('проверяемая строка', 20);
+checkStringLength('проверяемая строка', 18);
+checkStringLength('проверяемая строка', 10);
 
-console.log ('Палиндромы');
+// Палиндромы
 
 function isPalindrome(string) {
  
@@ -23,8 +23,8 @@ function isPalindrome(string) {
   return normalizedString === reversedString;
 }
 
-console.log(isPalindrome('топот'));
-console.log(isPalindrome('ДовОд'));
-console.log(isPalindrome('Кекс'));
-console.log(isPalindrome('Лёша на полке клопа нашёл '));
-console.log(isPalindrome('Пчела'));
+isPalindrome('топот');
+isPalindrome('ДовОд');
+isPalindrome('Кекс');
+isPalindrome('Лёша на полке клопа нашёл ');
+isPalindrome('Пчела');
