@@ -95,3 +95,5 @@ const createPhoto = (index) => ({
 const photos = Array.from({ length: PHOTO_COUNT }, (_, index) =>
   createPhoto(index)
 );
+
+export {photos};
