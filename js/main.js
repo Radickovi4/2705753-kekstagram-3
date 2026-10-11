@@ -1,2 +1,2 @@
 import './utils.js';
-import {photos} from './posts.js';
+// import {photos} from './posts.js';
