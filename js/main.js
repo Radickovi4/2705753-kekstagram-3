@@ -1,9 +1,9 @@
+
 import './utils.js';
-// import './pictures.js';
 import './form.js';
 
 import {getData} from './api.js';
-import {renderPictures} from './pictures.js';
+import {initFilters} from './filters.js';
 
 const showLoadError = () => {
   const errorMessage = document.createElement('div');
@@ -13,9 +13,5 @@ const showLoadError = () => {
 };
 
 getData()
-  .then((photos) => {
-    renderPictures(photos);
-  })
-  .catch(() => {
-    showLoadError();
-  });
+  .then(initFilters)
+  .catch(showLoadError);
