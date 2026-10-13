@@ -31,7 +31,7 @@ const SCALE_MIN = 25;
 const SCALE_MAX = 100;
 const DEFAULT_SCALE = 100;
 
-const COMMENTS_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
+const COMMENTS_PATTERN = /^#[a-zа-яё0-9-]{1,19}$/i;
 
 const normalizeHashtags = (value) =>
   value.trim().split(/\s+/).filter(Boolean);
