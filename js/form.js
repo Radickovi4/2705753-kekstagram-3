@@ -10,6 +10,9 @@ const hashtagsInput = document.querySelector('.text__hashtags');
 const descriptionInput = document.querySelector('.text__description');
 
 const previewImage = document.querySelector('.img-upload__preview img');
+
+let previewUrl = null;
+
 const scaleInput = document.querySelector('.scale__control--value');
 const smallerButton = document.querySelector('.scale__control--smaller');
 const biggerButton = document.querySelector('.scale__control--bigger');
@@ -252,6 +255,12 @@ const closeUploadForm = () => {
   document.body.classList.remove('modal-open');
 
   uploadForm.reset();
+
+  if (previewUrl) {
+    URL.revokeObjectURL(previewUrl);
+    previewUrl = null;
+  }
+
   fileInput.value = '';
 
   resetImageSettings();
@@ -275,11 +284,22 @@ function onDocumentKeydown(evt) {
   closeUploadForm();
 }
 
+
 fileInput.addEventListener('change', () => {
-  if (fileInput.files.length > 0) {
+  const file = fileInput.files[0];
+
+  if (file) {
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+    }
+
+    previewUrl = URL.createObjectURL(file);
+    previewImage.src = previewUrl;
+
     openUploadForm();
   }
 });
+
 
 closeButton.addEventListener('click', closeUploadForm);
 
