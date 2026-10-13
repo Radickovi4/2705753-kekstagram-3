@@ -1,5 +1,4 @@
 
-import {photos} from './posts.js';
 import {showBigPicture} from './big-picture.js';
 
 const pictureTemplate = document.querySelector('#picture').content;
@@ -25,11 +24,14 @@ const renderPicture = (photo) => {
   return pictureElement;
 };
 
-const picturesFragment = document.createDocumentFragment();
+const renderPictures = (photos) => {
+  const fragment = document.createDocumentFragment();
 
-photos.forEach((photo) => {
-  const pictureElement = renderPicture(photo);
-  picturesFragment.append(pictureElement);
-});
+  photos.forEach((photo) => {
+    fragment.append(renderPicture(photo));
+  });
 
-picturesContainer.append(picturesFragment);
+  picturesContainer.append(fragment);
+};
+
+export {renderPictures};

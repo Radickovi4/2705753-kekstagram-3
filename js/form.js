@@ -1,4 +1,6 @@
 
+import {sendData} from './api.js';
+
 const uploadForm = document.querySelector('.img-upload__form');
 const fileInput = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
@@ -281,8 +283,63 @@ fileInput.addEventListener('change', () => {
 
 closeButton.addEventListener('click', closeUploadForm);
 
-uploadForm.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
-    evt.preventDefault();
+const showFormMessage = (type) => {
+  const template = document.querySelector(
+    type === 'success' ? '#success' : '#error'
+  );
+
+  if (!template) {
+    return;
   }
+
+  const messageFragment = template.content.cloneNode(true);
+  const message = messageFragment.querySelector('section');
+  const button = message.querySelector('button');
+
+  document.body.append(message);
+
+  const closeMessage = () => {
+    message.remove();
+    document.removeEventListener('keydown', onMessageKeydown);
+  };
+
+  function onMessageKeydown(evt) {
+    if (evt.key === 'Escape') {
+      evt.stopPropagation();
+      closeMessage();
+    }
+  }
+
+  button.addEventListener('click', closeMessage);
+
+  message.addEventListener('click', (evt) => {
+    if (evt.target === message) {
+      closeMessage();
+    }
+  });
+
+  document.addEventListener('keydown', onMessageKeydown);
+};
+
+uploadForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  if (!pristine.validate()) {
+    return;
+  }
+
+  const submitButton = uploadForm.querySelector('.img-upload__submit');
+  submitButton.disabled = true;
+
+  sendData(new FormData(uploadForm))
+    .then(() => {
+      closeUploadForm();
+      showFormMessage('success');
+    })
+    .catch(() => {
+      showFormMessage('error');
+    })
+    .finally(() => {
+      submitButton.disabled = false;
+    });
 });
