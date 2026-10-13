@@ -3,7 +3,6 @@ import {showBigPicture} from './big-picture.js';
 
 const pictureTemplate = document.querySelector('#picture').content;
 const picturesContainer = document.querySelector('.pictures');
-picturesContainer.innerHTML = '';
 
 const renderPicture = (photo) => {
   const pictureElement = pictureTemplate.cloneNode(true);
@@ -26,6 +25,10 @@ const renderPicture = (photo) => {
 };
 
 const renderPictures = (photos) => {
+  picturesContainer.querySelectorAll('.picture').forEach((picture) => {
+    picture.remove();
+  });
+
   const fragment = document.createDocumentFragment();
 
   photos.forEach((photo) => {
