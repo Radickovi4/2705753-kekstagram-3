@@ -76,8 +76,11 @@ function closeBigPicture() {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
+const onCloseBigPicture = closeBigPicture;
+
 const showBigPicture = (photo) => {
   bigPictureImage.src = photo.url;
+  bigPictureImage.alt = photo.description;
   likesCount.textContent = photo.likes;
   commentsTotalCount.textContent = photo.comments.length;
   socialCaption.textContent = photo.description;
@@ -100,6 +103,6 @@ const showBigPicture = (photo) => {
 };
 
 commentsLoader.addEventListener('click', onCommentsLoaderClick);
-closeButton.addEventListener('click', closeBigPicture);
+closeButton.addEventListener('click', onCloseBigPicture);
 
 export {showBigPicture};
